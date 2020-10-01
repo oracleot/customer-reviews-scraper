@@ -19,7 +19,7 @@ describe Scraper do
   let(:scraper) { Scraper.new }
   let(:movie1) { 'the boy in the garden' }
   let(:movie2) { 'the boy | in the garden' }
-  let(:movie3) { '$village' }
+  let(:movie3) { 'village' }
 
   describe '#valid_title?' do
     it 'returns true if movie title is valid' do
@@ -28,6 +28,20 @@ describe Scraper do
 
     it 'returns false if movie title is invalid' do
       expect(scraper.title_valid?(movie2)).not_to be true
+    end
+  end
+
+  describe '#generate_url' do
+    it 'replaces whitespaces in a title with underscores' do
+      expect(scraper.generate_url(movie1)).to eql('the_boy_in_the_garden')
+    end
+
+    it 'replaces whitespaces in a title with underscores' do
+      expect(scraper.generate_url(movie1)).not_to eql(movie1)
+    end
+
+    it 'does not alter movie titles with no spaces' do
+      expect(scraper.generate_url(movie3)).to eql(movie3)
     end
   end
 end

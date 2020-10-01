@@ -7,12 +7,14 @@ class Scraper < Spider
 
   def title_valid?(title)
     !title.empty? && title.index(/[$.,|]/).nil?
-    # is not empty, AND
-    # does not contain symbols like # $ , @ | ...
   end
 
   # Generate movie URL
   # generate_url(movie_title)
+
+  def generate_url(title)
+    title.gsub(' ', '_')
+  end
 
   # Check movie availability
   # is_url_valid?(movie_url)
