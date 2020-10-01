@@ -1,4 +1,5 @@
 require_relative '../lib/spider.rb'
+require_relative '../lib/scraper.rb'
 
 describe Spider do
   let(:my_spider) { Spider.new('the_garden_left_behind') }
@@ -10,6 +11,23 @@ describe Spider do
 
     it 'returns an array of scraped data with a valid selector' do
       expect(my_spider.scrape(CRITIC_REVIEW_SELECTOR.to_s)).to be_an(Array)
+    end
+  end
+end
+
+describe Scraper do
+  let(:scraper) { Scraper.new }
+  let(:movie1) { 'the boy in the garden' }
+  let(:movie2) { 'the boy | in the garden' }
+  let(:movie3) { '$village' }
+
+  describe '#valid_title?' do
+    it 'returns true if movie title is valid' do
+      expect(scraper.title_valid?(movie1)).to be true
+    end
+
+    it 'returns false if movie title is invalid' do
+      expect(scraper.title_valid?(movie2)).not_to be true
     end
   end
 end

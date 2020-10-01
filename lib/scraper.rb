@@ -1,11 +1,15 @@
 require_relative './spider.rb'
 
 class Scraper < Spider
-  # Initialize with scraper name and url
-  # Create an instance from the Spider class
+  def initialize(title_url = 'billy_the_kid_2007')
+    @title_url = title_url
+  end
 
-  # Create movie title validator
-  # is_title_valid?(title)
+  def title_valid?(title)
+    !title.empty? && title.index(/[$.,|]/).nil?
+    # is not empty, AND
+    # does not contain symbols like # $ , @ | ...
+  end
 
   # Generate movie URL
   # generate_url(movie_title)
@@ -22,6 +26,8 @@ class Scraper < Spider
   # scraper.scrape('.top_critic p')
   # Save result in critic_reviews array, if no results return empty array
   # return an Hash: reviews = { audience_reviews: audience_reviews, critic_reviews: critic_reviews }
+
+  def scrape; end
 
   # Scraping
   # scrape(movie_title)

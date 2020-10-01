@@ -3,8 +3,8 @@ require 'open-uri'
 require_relative '../lib/constants.rb'
 
 class Spider
-  def initialize(url = 'billy_the_kid_2007')
-    endpoint_url = (BASE_MOVIE_URL + url).to_s
+  def initialize(title_url)
+    endpoint_url = (BASE_MOVIE_URL + title_url).to_s
     @doc = Nokogiri::HTML(URI.open(endpoint_url))
   end
 

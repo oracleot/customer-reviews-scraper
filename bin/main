@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
-require_relative '../lib/scraper.rb'
-require_relative '../lib/constants.rb'
 
 puts 'Welcome to my awesome customer reviews scraper :-D'
 
