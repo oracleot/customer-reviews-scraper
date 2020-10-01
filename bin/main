@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+require_relative '../lib/scraper.rb'
+
+puts 'Welcome to my awesome customer reviews scraper :-D'
+
+# Get movie title from user
+# Validate movie title
+# Generate movie url
+# Validate movie url
+# Create a new scraper from the scraper class
+# Initiate web scraping and get reviews back
+# Print reviews
+# puts 'AUDIENCE REVIEWS FOR MOVIE'
+# puts "--------------------------\n"
+# if empty
+  # return 'No audience reviews found!'
+# else
+  # audience_reviews.each { |review| puts "#{event.content}\n\n" }
+# puts "\n\n"
+# puts 'CRITIC REVIEWS FOR MOVIE'
+# puts "--------------------------\n"
+# critic_reviews.each do |event|
+#   puts "#{event.content[46..(event.content.length - 39)]}"
+# end
