@@ -1,12 +1,14 @@
 require 'nokogiri'
 require 'open-uri'
+require_relative '../lib/constants.rb'
 
 class Spider
-  # Create methods to be inherited by the Scraper class
+  def initialize(url = 'billy_the_kid_2007')
+    endpoint_url = (BASE_MOVIE_URL+url).to_s
+    @doc = Nokogiri::HTML(URI.open(endpoint_url))
+  end
 
-  # Fetch and parse HTML document
-  # doc = Nokogiri::HTML(URI.open('https://www.rottentomatoes.com/m/billy_the_kid_2007'))
-
-  # Create scraping method to be exported
-  # return doc.css('.mop-audience-reviews__reviews-wrap .mop-audience-reviews__review--comment')
+  def scrape(selector)
+    @doc.css(selector).to_a
+  end
 end
