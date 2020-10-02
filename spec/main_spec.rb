@@ -1,3 +1,4 @@
+require 'nokogiri'
 require_relative '../lib/spider.rb'
 require_relative '../lib/scraper.rb'
 
@@ -73,7 +74,7 @@ describe Scraper do
     end
 
     it 'raises an error with an invalid movie URL' do
-      expect(scraper.scrape_movie('damilola_oduronbi')).to eql("OpenURI Error")
+      expect(scraper.scrape_movie('damilola_oduronbi')).to eql('OpenURI Error')
     end
   end
 end

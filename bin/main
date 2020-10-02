@@ -1,9 +1,10 @@
+# rubocop:disable Metrics/MethodLength,Metrics/PerceivedComplexity,Style/IdenticalConditionalBranches,Style/MultipleComparison
 #!/usr/bin/env ruby
 require_relative '../lib/scraper.rb'
 
 def welcome_user
   puts "Hello there!\nWelcome to #{APP_NAME}\n\n"
-  puts "#{APP_INTRO}"
+  puts APP_INTRO.to_s
   puts "Before you get started, please have a look at the instructions on how to navigate the app below:\n"
   puts "Oops sorry! There are no instructions for you to follow, all you need to provide is a valid movie title, the app takes the instructions :-D\n"
   puts "\nLet's get started!\n\n"
@@ -15,9 +16,7 @@ def start_app
   print 'Movie title: '
   movie_title = ''
   until scraper.title_valid?(movie_title)
-    if movie_title != ''
-      puts 'Please provide a valid movie title'
-    end
+    puts 'Please provide a valid movie title' if movie_title != ''
     movie_title = gets.chomp.downcase
   end
   print "\nGenerating url..."
@@ -43,7 +42,7 @@ def start_app
     if reviews[:critic_reviews].empty?
       'No audience reviews found!'
     else
-      reviews[:critic_reviews].each { |review| puts "#{review.content[46..(review.content.length - 39)]}" }
+      reviews[:critic_reviews].each { |review| puts review.content[46..(review.content.length - 39)].to_s }
     end
     try_again?
   else
@@ -57,9 +56,7 @@ def try_again?
   print "YES (I want to) NO, (I'm done, thanks): "
   user_choice = ''
   until user_choice == 'yes' or user_choice == 'no'
-    if user_choice != ''
-      puts 'Please just type YES or NO'
-    end
+    puts 'Please just type YES or NO' if user_choice != ''
     user_choice = gets.chomp.downcase
   end
   if user_choice == 'yes'
@@ -72,3 +69,5 @@ end
 
 welcome_user
 start_app
+
+# rubocop:enable Metrics/MethodLength,Metrics/PerceivedComplexity,Style/IdenticalConditionalBranches,Style/MultipleComparison

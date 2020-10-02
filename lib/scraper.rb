@@ -18,12 +18,10 @@ class Scraper < Spider
   end
 
   def scrape_movie(movie_url)
-    begin
-      critic_reviews = generate_arr(CRITIC_REVIEW_SELECTOR, movie_url.to_s)
-      audience_reviews = generate_arr(AUDIENCE_REVIEW_SELECTOR, movie_url.to_s)
-      { critic_reviews: critic_reviews, audience_reviews: audience_reviews }
-    rescue OpenURI::HTTPError
-      'OpenURI Error'
-    end
+    critic_reviews = generate_arr(CRITIC_REVIEW_SELECTOR, movie_url.to_s)
+    audience_reviews = generate_arr(AUDIENCE_REVIEW_SELECTOR, movie_url.to_s)
+    { critic_reviews: critic_reviews, audience_reviews: audience_reviews }
+  rescue OpenURI::HTTPError
+    'OpenURI Error'
   end
 end
