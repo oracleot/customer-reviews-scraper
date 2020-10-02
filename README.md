@@ -1,6 +1,6 @@
-# Customer Reviews Scraper
+# User Reviews Scraper
 
-Customer reviews go a long way in helping businesses and individuals make mission-critical decisions. Hence, the creation of apps like this, that helps to scrape the internet for useful information.
+User reviews go a long way in helping businesses and individuals make mission-critical decisions. Hence, the creation of apps like this, that helps to scrape the internet for useful information.
 
 This version of the app is designed for movie lovers to check out reviews of movies by critics and the audience, from the famous Rotten Tomatoes (an American review-aggregation website for film and television)
 
@@ -12,7 +12,11 @@ This version of the app is designed for movie lovers to check out reviews of mov
 
 ## Video Explanation
 
-Here is the [video explanation](https://www.loom.com/share/fe7e6d6b89be4cdc93f67d9be69795ff) of this project.
+Here is the [video explanation](https://www.loom.com/share/2f21d9d832864e478a11af36f318d9e2) of this project.
+
+## Live Demo
+
+[![Run on Repl.it](https://repl.it/badge/github/oracleot/user-reviews-scraper)](https://repl.it/@oracleot/User-Reviews-Scraper)
 
 ## Prerequisities
 
@@ -22,11 +26,11 @@ To get this project up and running locally, you must already have little experie
 
 **Step 1: ** Clone the repo
 
-`git clone git@github.com:oracleot/customer-reviews-scraper.git`
+`git clone git@github.com:oracleot/user-reviews-scraper.git`
 
 **Step 2: ** Move into project directory
 
-`cd customer-reviews-scraper`
+`cd user-reviews-scraper`
 
 **Step 3: ** Install necessary gems
 
