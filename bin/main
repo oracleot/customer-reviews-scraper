@@ -23,5 +23,20 @@ puts 'Welcome to my awesome customer reviews scraper :-D'
 #   puts "#{event.content[46..(event.content.length - 39)]}"
 # end
 
-scraper = Scraper.new
-p scraper.test_scraper
+# scraper = Scraper.new
+# movie_title = ''
+# until scraper.title_valid?(movie_title)
+#   p 'Please provide a valid movie title'
+#   movie_title = gets.chomp
+# end
+# puts 'generating url...'
+# movie_url = scraper.generate_url(movie_title)
+# puts "url generated #{movie_url}"
+# puts '\nvalidating generated url...'
+# valid_scraper_url = scraper.url_valid?(movie_url)
+# if valid_scraper_url
+#   puts 'fetching your reviews...'
+#   p scraper.scrape_movie(movie_url)
+# else
+#   p 'This movie is not available in our database'
+# end
