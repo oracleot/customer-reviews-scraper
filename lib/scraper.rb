@@ -9,15 +9,21 @@ class Scraper < Spider
     !title.empty? && title.index(/[$.,|]/).nil?
   end
 
-  # Generate movie URL
-  # generate_url(movie_title)
-
   def generate_url(title)
     title.gsub(' ', '_')
   end
 
-  # Check movie availability
-  # is_url_valid?(movie_url)
+  def url_valid?(movie_url)
+    scrape_movie(movie_url) != 'OpenURI Error'
+  end
+
+  def scrape_movie(movie_url)
+    begin
+      generate_arr(CRITIC_REVIEW_SELECTOR, movie_url.to_s)
+    rescue OpenURI::HTTPError
+      'OpenURI Error'
+    end
+  end
 
   # Create scrape method
   # Show loader (#scraping)

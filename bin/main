@@ -22,3 +22,6 @@ puts 'Welcome to my awesome customer reviews scraper :-D'
 # critic_reviews.each do |event|
 #   puts "#{event.content[46..(event.content.length - 39)]}"
 # end
+
+scraper = Scraper.new
+p scraper.test_scraper

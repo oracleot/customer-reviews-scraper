@@ -2,15 +2,15 @@ require_relative '../lib/spider.rb'
 require_relative '../lib/scraper.rb'
 
 describe Spider do
-  let(:my_spider) { Spider.new('the_garden_left_behind') }
+  let(:my_spider) { Spider.new }
 
-  describe '#scrape' do
-    it 'returns an array of scraped data with a valid selector' do
-      expect(my_spider.scrape(AUDIENCE_REVIEW_SELECTOR.to_s)).to be_an(Array)
+  describe '#generate_arr' do
+    it 'returns an array of scraped data with a valid selector and title_url' do
+      expect(my_spider.generate_arr(CRITIC_REVIEW_SELECTOR, 'the_garden_left_behind')).to be_an(Array)
     end
 
-    it 'returns an array of scraped data with a valid selector' do
-      expect(my_spider.scrape(CRITIC_REVIEW_SELECTOR.to_s)).to be_an(Array)
+    it 'returns an array of scraped data with a valid selector and title_url' do
+      expect { my_spider.generate_arr(CRITIC_REVIEW_SELECTOR, 'the_garden_lef_behind') }.to raise_error
     end
   end
 end
@@ -18,11 +18,23 @@ end
 describe Scraper do
   let(:scraper) { Scraper.new }
   let(:movie1) { 'the boy in the garden' }
+  let(:movie_url_invalid) { 'the_boy_in_the_garden' }
+  let(:movie_url_valid) { 'the_garden_left_behind' }
   let(:movie2) { 'the boy | in the garden' }
   let(:movie3) { 'village' }
 
-  describe '#valid_title?' do
+  describe '#title_valid?' do
     it 'returns true if movie title is valid' do
+      expect(scraper.title_valid?(movie1)).to be true
+    end
+
+    it 'returns false if movie title is invalid' do
+      expect(scraper.title_valid?(movie2)).not_to be true
+    end
+  end
+
+  describe '#url_valid?' do
+    it 'returns true if generated url is valid' do
       expect(scraper.title_valid?(movie1)).to be true
     end
 
@@ -40,8 +52,18 @@ describe Scraper do
       expect(scraper.generate_url(movie1)).not_to eql(movie1)
     end
 
-    it 'does not alter movie titles with no spaces' do
+    it 'does not alter movie titles with no whitespaces' do
       expect(scraper.generate_url(movie3)).to eql(movie3)
+    end
+  end
+
+  describe '#url_valid?' do
+    it 'returns true if generated url is a valid movie url' do
+      expect(scraper.url_valid?(movie_url_valid)).to be true
+    end
+
+    it 'returns false if generated url is an valid movie url' do
+      expect(scraper.url_valid?(movie_url_invalid)).to be false
     end
   end
 end
