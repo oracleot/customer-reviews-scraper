@@ -1,5 +1,5 @@
-# rubocop:disable Metrics/MethodLength,Metrics/PerceivedComplexity,Style/IdenticalConditionalBranches,Style/MultipleComparison
 #!/usr/bin/env ruby
+# rubocop:disable Layout/LineLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Style/IdenticalConditionalBranches
 require_relative '../lib/scraper.rb'
 
 def welcome_user
@@ -55,7 +55,7 @@ def try_again?
   puts "\n\nWould you love to check for another movie? Type YES or NO\n"
   print "YES (I want to) NO, (I'm done, thanks): "
   user_choice = ''
-  until user_choice == 'yes' or user_choice == 'no'
+  until user_choice.match?(/^yes$|^no$/)
     puts 'Please just type YES or NO' if user_choice != ''
     user_choice = gets.chomp.downcase
   end
@@ -70,4 +70,4 @@ end
 welcome_user
 start_app
 
-# rubocop:enable Metrics/MethodLength,Metrics/PerceivedComplexity,Style/IdenticalConditionalBranches,Style/MultipleComparison
+# rubocop:enable Layout/LineLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Style/IdenticalConditionalBranches

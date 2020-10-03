@@ -10,20 +10,25 @@ This version of the app is designed for movie lovers to check out reviews of mov
 * Ruby
 * Nokogiri
 
-## Video Explanation
+## How the app works
+This project which focuses on giving users critic and audience reviews on any choice of movie indicated by the user works with the logic detailed below:
+- The app asks the user for their desired movie title, this undergoes a set of verification provided by some methods in the Scraper class
+- The title provided by the user is verified using the #title_valid?
+- If the title provided is valid, a movie url is generated using the #generate_url
+- Then the generated url is further verified to make sure it is available on Rotten Tomatoes using the #url_valid?
+- If the url is valid the Scraper scrapes the Rotten Tomatoes url for available critic and audience reviews using the #scrape_movie
+- The final array returned by the #scrape_movie is returned by the #generate_arr of the Spider class
 
+## Video Explanation
 Here is the [video explanation](https://www.loom.com/share/2f21d9d832864e478a11af36f318d9e2) of this project.
 
 ## Live Demo
-
 [![Run on Repl.it](https://repl.it/badge/github/oracleot/user-reviews-scraper)](https://repl.it/@oracleot/User-Reviews-Scraper)
 
 ## Prerequisities
-
 To get this project up and running locally, you must already have little experience working with Ruby and have it installed
 
 ## Setting up project
-
 **Step 1: ** Clone the repo
 
 `git clone git@github.com:oracleot/user-reviews-scraper.git`
