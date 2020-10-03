@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# rubocop:disable Layout/LineLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Style/IdenticalConditionalBranches
+# rubocop:disable Layout/LineLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Style/IdenticalConditionalBranches,Metrics/CyclomaticComplexity,Metrics/AbcSize
 require_relative '../lib/scraper.rb'
 
 def welcome_user
@@ -14,12 +14,12 @@ def start_app
   scraper = Scraper.new
   print "Are you interested in checking reviews on #{scraper.default_title.capitalize}; (Yes or No)"
   check_default_review = gets.chomp.downcase
-  unless check_default_review == 'yes'
+  if check_default_review == 'yes'
+    movie_title = 'billy the kid 2007'
+  else
     puts 'What movie are you interested in?'
     print 'Movie title: '
     movie_title = ''
-  else
-    movie_title = 'billy the kid 2007'
   end
   until scraper.title_valid?(movie_title)
     puts 'Please provide a valid movie title' if movie_title != ''
@@ -76,4 +76,4 @@ end
 welcome_user
 start_app
 
-# rubocop:enable Layout/LineLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Style/IdenticalConditionalBranches
+# rubocop:enable Layout/LineLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Style/IdenticalConditionalBranches,Metrics/CyclomaticComplexity,Metrics/AbcSize

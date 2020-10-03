@@ -1,17 +1,18 @@
-require 'nokogiri'
 require_relative '../lib/spider.rb'
 require_relative '../lib/scraper.rb'
 
 describe Spider do
   let(:my_spider) { Spider.new }
+  let(:valid_url) { 'the_garden_left_behind' }
+  let(:invalid_url) { 'damilola' }
 
   describe '#generate_arr' do
     it 'returns an array of scraped data with a valid url' do
-      expect(my_spider.generate_arr(CRITIC_REVIEW_SELECTOR, 'the_garden_left_behind')).to be_an(Array)
+      expect(my_spider.generate_arr(CRITIC_REVIEW_SELECTOR, valid_url)).to be_an(Array)
     end
 
-    it 'raises an error with an invalid url' do
-      expect { my_spider.generate_arr(CRITIC_REVIEW_SELECTOR, 'the_garden_lef_behind') }.to raise_error
+    it 'raises an OpenURI::HTTPError with an invalid url' do
+      expect { my_spider.generate_arr(CRITIC_REVIEW_SELECTOR, invalid_url) }.to raise_error(OpenURI::HTTPError)
     end
   end
 end
@@ -26,16 +27,6 @@ describe Scraper do
 
   describe '#title_valid?' do
     it 'returns true if movie title is valid' do
-      expect(scraper.title_valid?(movie1)).to be true
-    end
-
-    it 'returns false if movie title is invalid' do
-      expect(scraper.title_valid?(movie2)).not_to be true
-    end
-  end
-
-  describe '#url_valid?' do
-    it 'returns true if generated url is valid' do
       expect(scraper.title_valid?(movie1)).to be true
     end
 
@@ -75,6 +66,12 @@ describe Scraper do
 
     it 'raises an error with an invalid movie URL' do
       expect(scraper.scrape_movie('damilola_oduronbi')).to eql('OpenURI Error')
+    end
+  end
+
+  describe '#get_reviews' do
+    it 'returns a NoMethodError being a private method' do
+      expect { scraper.get_reviews('the_garden_left_behind') }.to raise_error(NoMethodError)
     end
   end
 end

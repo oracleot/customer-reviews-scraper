@@ -7,8 +7,6 @@ class Scraper < Spider
     @default_title = default_title
   end
 
-  public
-
   def title_valid?(title)
     !title.empty? && title.index(/[$.,|#]/).nil?
   end
@@ -32,6 +30,6 @@ class Scraper < Spider
   private
 
   def get_reviews(selector, movie_url)
-    return generate_arr(selector, movie_url.to_s)
+    generate_arr(selector, movie_url.to_s)
   end
 end
