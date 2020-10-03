@@ -5,6 +5,8 @@ class Scraper < Spider
     @title_url = title_url
   end
 
+  public
+
   def title_valid?(title)
     !title.empty? && title.index(/[$.,|#]/).nil?
   end
@@ -18,10 +20,16 @@ class Scraper < Spider
   end
 
   def scrape_movie(movie_url)
-    critic_reviews = generate_arr(CRITIC_REVIEW_SELECTOR, movie_url.to_s)
-    audience_reviews = generate_arr(AUDIENCE_REVIEW_SELECTOR, movie_url.to_s)
+    critic_reviews = get_reviews(CRITIC_REVIEW_SELECTOR, movie_url)
+    audience_reviews = get_reviews(AUDIENCE_REVIEW_SELECTOR, movie_url)
     { critic_reviews: critic_reviews, audience_reviews: audience_reviews }
   rescue OpenURI::HTTPError
     'OpenURI Error'
+  end
+
+  private
+
+  def get_reviews(selector, movie_url)
+    return generate_arr(selector, movie_url.to_s)
   end
 end
