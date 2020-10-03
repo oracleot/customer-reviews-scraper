@@ -1,0 +1,79 @@
+#!/usr/bin/env ruby
+# rubocop:disable Layout/LineLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Style/IdenticalConditionalBranches,Metrics/CyclomaticComplexity,Metrics/AbcSize
+require_relative '../lib/scraper.rb'
+
+def welcome_user
+  puts "Hello there!\nWelcome to #{APP_NAME}\n\n"
+  puts APP_INTRO.to_s
+  puts "Before you get started, please have a look at the instructions on how to navigate the app below:\n"
+  puts "Oops sorry! There are no instructions for you to follow, all you need to provide is a valid movie title, the app takes the instructions :-D\n"
+  puts "\nLet's get started!\n\n"
+end
+
+def start_app
+  scraper = Scraper.new
+  print "Are you interested in checking reviews on #{scraper.default_title.capitalize}; (Yes or No)"
+  check_default_review = gets.chomp.downcase
+  if check_default_review == 'yes'
+    movie_title = 'billy the kid 2007'
+  else
+    puts 'What movie are you interested in?'
+    print 'Movie title: '
+    movie_title = ''
+  end
+  until scraper.title_valid?(movie_title)
+    puts 'Please provide a valid movie title' if movie_title != ''
+    movie_title = gets.chomp.downcase
+  end
+  print "\nGenerating url..."
+  movie_url = scraper.generate_url(movie_title)
+  puts "\nYour generated movie URL is: #{BASE_MOVIE_URL + movie_url}\n"
+  print "\nChecking if movie exists..."
+  valid_scraper_url = scraper.url_valid?(movie_url)
+  if valid_scraper_url
+    print "\nGreat! Your movie exists in the database. Be patient while we fetch the reviews for this movie"
+    reviews = scraper.scrape_movie(movie_url)
+
+    puts "\n\n\n"
+    puts 'AUDIENCE REVIEWS'
+    puts "--------------------------\n"
+    if reviews[:audience_reviews].empty?
+      'No audience reviews found!'
+    else
+      reviews[:audience_reviews].each { |review| puts "#{review.content}\n\n" }
+    end
+    puts "\n\n\n"
+    puts 'CRITIC REVIEWS'
+    puts "--------------------------\n"
+    if reviews[:critic_reviews].empty?
+      'No audience reviews found!'
+    else
+      reviews[:critic_reviews].each { |review| puts review.content[46..(review.content.length - 39)].to_s }
+    end
+    try_again?
+  else
+    puts "\nOops! Rotten Tomatoes does not have this movie"
+    try_again?
+  end
+end
+
+def try_again?
+  puts "\n\nWould you love to check for another movie? Type YES or NO\n"
+  print "YES (I want to) NO, (I'm done, thanks): "
+  user_choice = ''
+  until user_choice.match?(/^yes$|^no$/)
+    puts 'Please just type YES or NO' if user_choice != ''
+    user_choice = gets.chomp.downcase
+  end
+  if user_choice == 'yes'
+    puts "\n\nWelcome back!\n"
+    start_app
+  else
+    puts "\n\Thanks for using #{APP_NAME}\n"
+  end
+end
+
+welcome_user
+start_app
+
+# rubocop:enable Layout/LineLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Style/IdenticalConditionalBranches,Metrics/CyclomaticComplexity,Metrics/AbcSize
