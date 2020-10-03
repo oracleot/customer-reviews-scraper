@@ -1,8 +1,10 @@
 require_relative './spider.rb'
 
 class Scraper < Spider
-  def initialize(title_url = 'billy_the_kid_2007')
-    @title_url = title_url
+  attr_reader :default_title
+
+  def initialize(default_title = 'billy the kid 2007')
+    @default_title = default_title
   end
 
   public
